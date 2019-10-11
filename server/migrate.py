@@ -1,8 +1,9 @@
 import psycopg2
 import pathlib
+import os
 import sys
 
-from utils import get_db_info
+from utils.db import get_db_info
 from utils.fs import get_file_contents, get_absolute_path
 
 
@@ -12,10 +13,14 @@ def replace_sql_imports(sql: str) -> str:
     Doing this to avoid having a separate migration for each
     of the functions
     """
+    lines = []
     for line in sql.splitlines():
         if '\i' in line:
-            filename = line.split('\i')[1]
-            line.replace('\i', get_file_contents(filename))
+            filename = line.split('\i ')[1]
+            filepath = os.getcwd() + '/db/' + filename
+            line = get_file_contents(filepath)
+        lines.append(line)
+    return '\n'.join(lines)
 
 def migrate(up_or_down, v_start, v_end):
     """

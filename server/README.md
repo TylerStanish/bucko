@@ -2,6 +2,7 @@ Use `FLASK_ENV` environment variable to set which environment you want to be in.
 
 Don't forget:
 - Run migrations
+  - Don't forget metacommands with `\i` must be relative to the db/ directory
 - Set `PYTHONPATH` to the absolute path to where main.py lives
 - Grep for `TODO`s and make sure they're done
 
