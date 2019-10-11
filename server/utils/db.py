@@ -18,4 +18,5 @@ def get_db_info() -> dict:
     env = os.environ['FLASK_ENV']
     if env == Environments.DEVELOPMENT:
         return json.loads(read_from_file(fs.get_absolute_path()))
+    # TODO please add condition checks for other environments
 
