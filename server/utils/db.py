@@ -16,7 +16,7 @@ def get_db_info() -> dict:
     Gets the database info depending on FLASK_ENV
     """
     env = os.environ['FLASK_ENV']
-    if env == Environments.DEVELOPMENT:
-        return json.loads(read_from_file(fs.get_absolute_path()))
+    joined = os.path.join(fs.get_absolute_path(), '../')
     # TODO please add condition checks for other environments
+    return json.loads(fs.get_file_contents(joined + f'secrets/{env}.db.json'))
 

@@ -26,14 +26,27 @@ def replace_sql_imports(sql: str) -> str:
         lines.append(line)
     return '\n'.join(lines)
 
+def get_latest_migration_version() -> int:
+    migrations = os.listdir(os.getcwd() + '/db/migrations')
+    max_so_far = 0
+    for mig in migrations:
+        max_so_far = max(max_so_far, int(mig[1:]))
+    return max_so_far
+
 def migrate_str(up_or_down: str, v_start: int, v_end: int) -> str:
     """
     :param v_start: The starting version
-    :param v_end: The ending version (exclusive)
+    :param v_end: The ending version (inclusive)
     """
     sql = []
-    for version in range(v_start, v_end):
-        sql.append(replace_sql_imports(get_file_contents(f'db/migrations/v{version}/{up_or_down}.sql')))
+    if up_or_down == 'down':
+        for version in range(v_end, v_start + 1):
+            sql.append(replace_sql_imports(get_file_contents(f'db/migrations/v{version}/{up_or_down}.sql')))
+    elif up_or_down == 'up':
+        for version in range(v_start, v_end + 1):
+            sql.append(replace_sql_imports(get_file_contents(f'db/migrations/v{version}/{up_or_down}.sql')))
+    else:
+        raise ValueError("up_or_down must be either 'up' or 'down'")
     return '\n'.join(sql)
 
 
