@@ -3,7 +3,7 @@ from collections import namedtuple
 fields = (
     'id',
     'email',
-    'hashed_password'
+    'password'
 )
 Profile = namedtuple('Profile', fields, defaults=(None,) * len(fields))
 
