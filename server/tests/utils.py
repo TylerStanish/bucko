@@ -8,7 +8,8 @@ from utils.db import get_db_info
 
 
 class DbTest(TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         os.environ['FLASK_ENV'] = 'testing'
         self.conn = psycopg2.connect(**get_db_info())
         # run migrations, detect current migration by default
@@ -18,7 +19,8 @@ class DbTest(TestCase):
         self.conn.commit()
         cur.close()
 
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(self):
         sql = migrate_str('down', get_latest_migration_version(), 1)
         cur = self.conn.cursor()
         cur.execute(sql)
