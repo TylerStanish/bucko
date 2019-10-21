@@ -3,6 +3,7 @@ from flask import Flask, g
 import psycopg2.extras
 from psycopg2.pool import ThreadedConnectionPool
 
+from auth.routes import auth_blueprint
 from utils.db import get_db_info
 
 
@@ -23,6 +24,7 @@ def create_app():
         return res
 
     # register blueprints
+    app.register_blueprint(auth_blueprint)
     return app
 
 

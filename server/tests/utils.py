@@ -13,7 +13,7 @@ class FlaskIntegrationTest(TestCase):
     def setUpClass(cls):
         print('hi from FlaskIntegrationTest!')
         cls.app = create_app()
-
+        cls.client = cls.app.test_client()
 
 class DbTest(FlaskIntegrationTest):
     @classmethod
