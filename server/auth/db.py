@@ -1,5 +1,6 @@
-from flask import g
+import secrets
 
+from flask import g
 import psycopg2
 
 from auth.models import Profile
@@ -14,4 +15,14 @@ def create_user(profile: Profile) -> Profile:
     row_dict = cur.fetchone()
     g.db.commit()
     return Profile(**row_dict)
+
+
+def create_user_session(profile: Profile):
+    cur = g.db.cursor()
+    cur.execute("""
+        insert into auth_session (token, profile_id) values (%s, %s) returning *
+    """, (secrets.token_urlsafe(63), profile.id))
+    row_dict = cur.fetchone()
+    g.db.commit()
+    return AuthSession(**row_dict)
 
