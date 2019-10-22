@@ -38,3 +38,11 @@ class DbTest(FlaskIntegrationTest):
         cur.close()
         cls.conn.close()
 
+    def setUp(self):
+        # TODO please allow having some sort of sql initial data that each test can specify?
+        pass
+
+    def tearDown(self):
+        # TODO please clear database! Don't migrate down, just delete all records
+        pass
+

@@ -1,5 +1,5 @@
-from flask import Flask, g
-
+from flask import Flask, g, jsonify
+from marshmallow import ValidationError
 import psycopg2.extras
 from psycopg2.pool import ThreadedConnectionPool
 
@@ -25,6 +25,14 @@ def create_app():
 
     # register blueprints
     app.register_blueprint(auth_blueprint)
+
+    # error handling
+    @app.errorhandler(ValidationError)
+    def handle_invalid_request_data(e):
+        return jsonify(e.messages), 400
+
+    # TODO add in a catch-all error handler?
+
     return app
 
 

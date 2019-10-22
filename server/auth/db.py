@@ -26,3 +26,27 @@ def create_user_session(profile: Profile):
     g.db.commit()
     return AuthSession(**row_dict)
 
+
+def check_user_login(profile: Profile) -> bool:
+    """
+    :param: profile Assumes the password is already hashed
+    """
+    cur = g.db.cursor()
+    cur.execute("""
+        select * from user where email = %s and password = %s
+    """, (profile.email, profile.password))
+    row_dict = cur.fetchone()
+    # do i really need to make a transaction?
+    g.db.commit()
+    return Profile(**row_dict)
+
+
+def get_profile_by_email(email: str) -> Profile:
+    cur = g.db.cursor()
+    cur.execute("""
+        select * from profile where email = %s
+    """, (profile.email))
+    row_dict = cur.fetchone()
+    g.db.commit()
+    return Profile(**row_dict)
+

@@ -1,15 +1,23 @@
 from collections import namedtuple
 
-fields = (
+profile_fields = (
     'id',
     'email',
     'password'
 )
-Profile = namedtuple('Profile', fields, defaults=(None,) * len(fields))
+Profile = namedtuple(
+    'Profile',
+    profile_fields,
+    defaults=(None,) * len(fields)
+)
 
-fields = (
+auth_session_fields = (
     'id',
     'token',
     'profile_id'
 )
-AuthSession  = namedtuple('AuthSession', fields, defaults=(None,) * len(fields))
+AuthSession  = namedtuple(
+    'AuthSession',
+    auth_session_fields,
+    defaults=(None,) * len(fields)
+)
