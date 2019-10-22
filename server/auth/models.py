@@ -8,7 +8,7 @@ profile_fields = (
 Profile = namedtuple(
     'Profile',
     profile_fields,
-    defaults=(None,) * len(fields)
+    defaults=(None,) * len(profile_fields)
 )
 
 auth_session_fields = (
@@ -19,5 +19,5 @@ auth_session_fields = (
 AuthSession  = namedtuple(
     'AuthSession',
     auth_session_fields,
-    defaults=(None,) * len(fields)
+    defaults=(None,) * len(auth_session_fields)
 )

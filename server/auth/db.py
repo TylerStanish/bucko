@@ -45,7 +45,7 @@ def get_profile_by_email(email: str) -> Profile:
     cur = g.db.cursor()
     cur.execute("""
         select * from profile where email = %s
-    """, (profile.email))
+    """, (email,))
     row_dict = cur.fetchone()
     g.db.commit()
     return Profile(**row_dict)
