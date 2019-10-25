@@ -40,7 +40,7 @@ def create_app():
     # TODO add in a catch-all error handler?
     @app.errorhandler(ApiException)
     def catchall(e: ApiException):
-        return jsonify({'error': 'There was an internal server error'}), 500
+        return jsonify({'error': e.message}), e.status_code
 
     # TODO add in a catch-all error handler?
     @app.errorhandler(Exception)

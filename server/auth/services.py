@@ -13,5 +13,7 @@ def check_password_matches(password: str, hashed: str) -> bool:
 
 def valid_login(email: str, password: str) -> bool:
     profile = get_profile_by_email(email)
-    return check_password_matches(password, profile.password)
+    if profile is None:
+        return False, None
+    return check_password_matches(password, profile.password), profile
 

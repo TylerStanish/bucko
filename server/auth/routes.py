@@ -1,6 +1,8 @@
+from http import HTTPStatus
+
 from flask import Blueprint, request, jsonify
 
-from auth.db import create_user, create_user_session, check_user_login
+from auth.db import create_user, create_user_session
 from auth.exceptions import ApiException, IncorrectPasswordException
 from auth.models import Profile
 from auth.schemas import SignupRequest, LoginResponse
@@ -22,9 +24,9 @@ def signup():
 @auth_blueprint.route('/login', methods=['POST'])
 def login():
     data: Profile = SignupRequest().load(request.get_json())
-    if not valid_login(data.email, data.password):
-        raise IncorrectPasswordException
-    profile = check_user_login(data)
+    valid, profile = valid_login(data.email, data.password)
+    if not valid:
+        raise IncorrectPasswordException('Incorrect password')
     session = create_user_session(profile)
     return jsonify({'token': session.token})
 
