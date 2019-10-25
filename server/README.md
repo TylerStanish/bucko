@@ -9,6 +9,7 @@ Don't forget:
 TODO
 - Auth
 - Error handling (especially with schemas)
+- Including and handling unique constraints
 
 Notes:
 - If you ever try to debug your tests, make sure to set your `PYTHONPATH` so imports work

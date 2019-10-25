@@ -2,9 +2,16 @@ import psycopg2
 import pathlib
 import os
 import sys
+from typing import List
 
 from utils.db import get_db_info
 from utils.fs import get_file_contents, get_absolute_path
+
+
+def get_all_tables(sql):
+    for line in sql.splitlines():
+        if 'create table' in line:
+            yield line.split('create table ')[1].split(' ')[0]
 
 
 def replace_sql_imports(sql: str) -> str:

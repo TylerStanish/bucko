@@ -12,9 +12,9 @@ def create_user(profile: Profile) -> Profile:
     cur.execute("""
         insert into profile (email, password) values (%s, %s) returning *
     """, (profile.email, profile.password))
-    row_dict = cur.fetchone()
+    row = cur.fetchone()
     g.db.commit()
-    return Profile(**row_dict)
+    return row
 
 
 def create_user_session(profile: Profile):
@@ -22,9 +22,9 @@ def create_user_session(profile: Profile):
     cur.execute("""
         insert into auth_session (token, profile_id) values (%s, %s) returning *
     """, (secrets.token_urlsafe(63), profile.id))
-    row_dict = cur.fetchone()
+    row = cur.fetchone()
     g.db.commit()
-    return AuthSession(**row_dict)
+    return row
 
 
 def check_user_login(profile: Profile) -> bool:
@@ -46,7 +46,7 @@ def get_profile_by_email(email: str) -> Profile:
     cur.execute("""
         select * from profile where email = %s
     """, (email,))
-    row_dict = cur.fetchone()
+    row = cur.fetchone()
     g.db.commit()
-    return Profile(**row_dict)
+    return row
 

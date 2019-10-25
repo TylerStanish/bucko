@@ -13,7 +13,6 @@ auth_blueprint = Blueprint('', __name__, url_prefix='/auth')
 @auth_blueprint.route('/signup', methods=['POST'])
 def signup():
     data: Profile = SignupRequest().load(request.get_json())
-    # TODO hash password!
     data = data._replace(password=hash_password(data.password))
     profile = create_user(data)
     session = create_user_session(profile)
