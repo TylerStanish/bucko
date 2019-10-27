@@ -54,9 +54,11 @@ def create_app():
         print(traceback.format_exc())
         app.logger.error(e)
         code = 500
+        msg = 'There was an internal server error'
         if isinstance(e, HTTPException):
             code = e.code
-        return jsonify({'error': 'There was an internal server error'}), code
+            msg = str(e)
+        return jsonify({'error': msg}), code
 
     return app
 
