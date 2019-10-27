@@ -6,6 +6,7 @@ from flask_cors import CORS
 from marshmallow import ValidationError
 import psycopg2.extras
 from psycopg2.pool import ThreadedConnectionPool
+from werkzeug.exceptions import HTTPException
 
 from auth.exceptions import ApiException
 from auth.routes import auth_blueprint
@@ -52,7 +53,10 @@ def create_app():
         # TODO please format exceptions and print, don't propagate them
         print(traceback.format_exc())
         app.logger.error(e)
-        return jsonify({'error': 'There was an internal server error'}), 500
+        code = 500
+        if isinstance(e, HTTPException):
+            code = e.code
+        return jsonify({'error': 'There was an internal server error'}), code
 
     return app
 
