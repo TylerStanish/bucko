@@ -2,6 +2,7 @@ import logging
 import traceback
 
 from flask import Flask, g, jsonify
+from flask_cors import CORS
 from marshmallow import ValidationError
 import psycopg2.extras
 from psycopg2.pool import ThreadedConnectionPool
@@ -14,6 +15,8 @@ from utils.db import get_db_info
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
+    app.url_map.strict_slashes = False
 
     db_info = get_db_info()
     pool = ThreadedConnectionPool(0, 16, **db_info, cursor_factory=psycopg2.extras.NamedTupleCursor)
@@ -24,6 +27,7 @@ def create_app():
 
     @app.after_request
     def after(res):
+        from flask import request
         pool.putconn(g.db)
         return res
 
@@ -52,8 +56,4 @@ def create_app():
 
     return app
 
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run()
 

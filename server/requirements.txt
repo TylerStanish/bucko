@@ -4,6 +4,7 @@ Click==7.0
 colorama==0.4.1
 coverage==4.5.4
 Flask==1.1.1
+Flask-Cors==3.0.8
 green==3.0.0
 itsdangerous==1.1.0
 Jinja2==2.10.3
