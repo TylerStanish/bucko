@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css'
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
@@ -18,10 +17,13 @@ import LoginPage from './pages/LoginPage'
 import Navbar from './components/Navbar'
 import reducers from './redux/reducers'
 
+import Actions from './redux/actions'
+
 const history = createBrowserHistory()
 const store = createStore(reducers(history), compose(applyMiddleware(routerMiddleware(history), reduxThunk)))
 
-function Main() {
+function Main(props) {
+  props.getTokenFromLocalStorage()
   return (
     <>
       <Navbar/>
@@ -37,7 +39,7 @@ function Main() {
   )
 }
 
-Main = connect()(Main)
+Main = connect(null, {getTokenFromLocalStorage: Actions.auth.getTokenFromLocalStorage})(Main)
 
 function App() {
   return (

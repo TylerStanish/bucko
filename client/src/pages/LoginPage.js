@@ -1,7 +1,10 @@
 import React, {useState} from 'react'
 import { InputGroup, Button } from '@blueprintjs/core'
+import { connect } from 'react-redux'
 
-export default () => {
+import Actions from '../redux/actions'
+
+const LoginPage = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   return (
@@ -19,8 +22,19 @@ export default () => {
           placeholder='Password'
           className='login-form-item'
         />
-        <Button text='Log in' fill onClick={e => {e.preventDefault(); console.log('hi');}} type='submit'/>
+        <Button text='Log in' fill onClick={e => {
+          e.preventDefault()
+          props.login(email, password)
+        }} type='submit'/>
+        <Button text='Sign up' fill onClick={e => {
+          e.preventDefault()
+          props.signup(email, password)
+        }} type='submit'/>
       </form>
     </div>
   )
 }
+export default connect(null, {
+  login: Actions.auth.login,
+  signup: Actions.auth.signup
+})(LoginPage)
