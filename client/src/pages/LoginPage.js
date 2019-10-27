@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { FormGroup, InputGroup, Button } from '@blueprintjs/core'
+import { InputGroup, Button } from '@blueprintjs/core'
 
 export default () => {
   const [email, setEmail] = useState('')
