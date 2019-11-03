@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {push} from 'connected-react-router'
 
 import * as Types from './Types'
 import Api from '../../api'
@@ -32,12 +33,14 @@ export const login = (email, password) => {
     const res = await Api.auth.login(email, password)
     const {token} = res.data
     dispatch(setToken(token))
+    dispatch(push('/dashboard'))
   }
 }
 
 export const logout = () => {
   return async dispatch => {
     dispatch(setToken(''))
+    dispatch(push('/'))
   }
 }
 

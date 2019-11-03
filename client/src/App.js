@@ -18,6 +18,7 @@ import Navbar from './components/Navbar'
 import reducers from './redux/reducers'
 
 import Actions from './redux/actions'
+import DashboardPage from './pages/DashboardPage';
 
 const history = createBrowserHistory()
 const store = createStore(reducers(history), compose(applyMiddleware(routerMiddleware(history), reduxThunk)))
@@ -30,6 +31,9 @@ function Main(props) {
       <Switch>
         <Route path='/login'>
           <LoginPage/>
+        </Route>
+        <Route path='/dashboard'>
+          <DashboardPage/>
         </Route>
         <Route path='/'>
           <LandingPage/>
