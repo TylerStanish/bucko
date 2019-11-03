@@ -6,7 +6,6 @@ import Api from '../../api'
 export const getTokenFromLocalStorage = () => {
   return async dispatch => {
     const token = await localStorage.getItem('token')
-    console.log('called me!', token)
     // axios.defaults.headers.common['Content-Type'] = 'application/json'
     if (token) {
       dispatch(setToken(token))
@@ -19,22 +18,33 @@ export const getTokenFromLocalStorage = () => {
 }
 
 export const setToken = token => {
-  return {
-    type: Types.SET_TOKEN,
-    payload: token
+  return async dispatch => {
+    await localStorage.setItem('token', token)
+    dispatch({
+      type: Types.SET_TOKEN,
+      payload: token
+    })
   }
 }
 
 export const login = (email, password) => {
   return async dispatch => {
     const res = await Api.auth.login(email, password)
-    console.log('login', res)
+    const {token} = res.data
+    dispatch(setToken(token))
+  }
+}
+
+export const logout = () => {
+  return async dispatch => {
+    dispatch(setToken(''))
   }
 }
 
 export const signup = (email, password) => {
   return async dispatch => {
     const res = await Api.auth.signup(email, password)
-    console.log('signup', res)
+    const {token} = res.data
+    dispatch(setToken(token))
   }
 }
