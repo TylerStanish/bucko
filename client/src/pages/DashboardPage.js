@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 const localizer = momentLocalizer(moment)
 
 const DashboardPage = props => {
-  console.log(props.events)
   return (
     <div>
       <section>
