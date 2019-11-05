@@ -49,5 +49,6 @@ export const signup = (email, password) => {
     const res = await Api.auth.signup(email, password)
     const {token} = res.data
     dispatch(setToken(token))
+    dispatch(push('/dashboard'))
   }
 }

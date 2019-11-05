@@ -17,6 +17,8 @@ const DashboardPage = props => {
           startAccessor='start'
           endAccessor='end'
           titleAccessor='title'
+          defaultView='day'
+          views={['week', 'day', 'agenda']}
         />
       </section>
     </div>

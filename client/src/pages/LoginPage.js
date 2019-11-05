@@ -21,6 +21,7 @@ const LoginPage = props => {
           onChange={e => setPassword(e.target.value)}
           placeholder='Password'
           className='login-form-item'
+          type='password'
         />
         <Button text='Log in' fill onClick={e => {
           e.preventDefault()
