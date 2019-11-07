@@ -1,4 +1,8 @@
 import React from 'react'
+import {
+  Button,
+  Intent
+} from '@blueprintjs/core'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment'
@@ -9,6 +13,11 @@ const localizer = momentLocalizer(moment)
 const DashboardPage = props => {
   return (
     <div>
+      <Button
+        fill
+        text='Add event'
+        intent={Intent.PRIMARY}
+      />
       <section>
         <Calendar
           localizer={localizer}

@@ -12,3 +12,11 @@ create table auth_session (
     -- TODO but don't forget to double check if you change your mind.
     -- , expires timestamptz not null
 );
+
+create table event (
+    id serial primary key
+    , profile_id int references profile(id) not null
+    , title text not null
+    , start timestamptz
+    , end timestamptz
+);
