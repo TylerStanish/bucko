@@ -6,8 +6,8 @@ services:
 before_install: 
   - "cd server"
 before_script: 
-  - "psql -c 'create database test-db;' -U postgres"
-  - "mkdir -p secrets && echo '{\"dbname\"\":\" \"test-db\", \"user\"\":\" \"postgres\"}' > secrets/testing.db.json"
+  - "psql -c 'create database testdb;' -U postgres"
+  - "mkdir -p secrets && echo '{\"dbname\"\":\" \"testdb\", \"user\"\":\" \"postgres\"}' > secrets/testing.db.json"
 install: 
   - "pip install -r requirements.txt"
 script: 
