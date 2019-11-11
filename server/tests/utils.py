@@ -13,7 +13,6 @@ from utils.fs import get_file_contents
 class FlaskIntegrationTest(TestCase):
     @classmethod
     def setUpClass(cls):
-        print('hi from FlaskIntegrationTest!')
         cls.app = create_app()
         cls.client = cls.app.test_client()
 
@@ -24,7 +23,6 @@ class DbTest(FlaskIntegrationTest):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        print('hi from DbTest!')
         cls.conn = psycopg2.connect(**get_db_info())
         # run migrations, detect current migration by default
         sql = migrate_str('up', 1, get_latest_migration_version())
@@ -35,7 +33,6 @@ class DbTest(FlaskIntegrationTest):
 
     @classmethod
     def tearDownClass(cls):
-        print('bye from DbTest!')
         sql = migrate_str('down', get_latest_migration_version(), 1)
         cur = cls.conn.cursor()
         cur.execute(sql)
