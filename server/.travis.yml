@@ -1,0 +1,14 @@
+language: "python"
+python:
+    - "3.7"
+services:
+    - postgres
+install:
+    - pip install -r requirements.txt
+script:
+    - green
+
+before_script:
+    - psql -c 'create database test-db;' -U postgres
+    - mkdir secrets && echo '{"dbname": "test-db", "user": "postgres"}' > secrets/testing.db.json
+
