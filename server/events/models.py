@@ -4,8 +4,8 @@ event_fields = (
     'id',
     'profile_id',
     'title',
-    'start',
-    'end'
+    'event_start',
+    'event_end'
 )
 Event = namedtuple(
     'Event',

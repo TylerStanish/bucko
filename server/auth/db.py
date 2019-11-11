@@ -39,7 +39,11 @@ def get_profile_by_email(email: str) -> Profile:
 def get_profile_by_token(token: str) -> Profile:
     cur = g.db.cursor()
     cur.execute("""
-        select * from profile inner join auth_session
+        select
+            profile.id,
+            email,
+            password
+        from profile inner join auth_session
             on (profile.id = auth_session.profile_id)
         where auth_session.token = %s
     """, (token,))
