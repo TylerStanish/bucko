@@ -17,6 +17,6 @@ create table event (
     id serial primary key
     , profile_id int references profile(id) not null
     , title text not null
-    , start timestamptz
-    , end timestamptz
+    , event_start timestamptz
+    , event_end timestamptz
 );

@@ -1,3 +1,4 @@
+import json
 from unittest import TestCase
 import os
 os.environ['FLASK_ENV'] = 'testing'
@@ -16,7 +17,10 @@ class FlaskIntegrationTest(TestCase):
         cls.app = create_app()
         cls.client = cls.app.test_client()
 
+
 class DbTest(FlaskIntegrationTest):
+    PRIMARY_EMAIL = 'tystanish@gmail.com'
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -50,4 +54,19 @@ class DbTest(FlaskIntegrationTest):
         cur = self.__class__.conn.cursor()
         cur.execute(get_file_contents('tests/data/drop.sql'))
         self.__class__.conn.commit()
+
+    def signup(self, email, password):
+        return self.client.post(
+            '/auth/signup',
+            content_type='application/json',
+            data=json.dumps({'email': email, 'password': password})
+        )
+
+    def login(self, email, password):
+        return self.client.post(
+            '/auth/login',
+            content_type='application/json',
+            data=json.dumps({'email': email, 'password': password})
+        )
+
 
