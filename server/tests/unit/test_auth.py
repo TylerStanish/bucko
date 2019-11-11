@@ -64,7 +64,14 @@ class TestAuthentication(TestCase):
         req_mock.headers = headers
         @require_authentication
         def test_route(profile):
-            pass
+            self.assertEqual(
+                Profile(
+                    id=1,
+                    email='bla@example.com',
+                    password='hashed password'
+                ),
+                profile
+            )
         try:
             test_route()
         except Exception:
