@@ -3,7 +3,7 @@ import secrets
 from flask import g
 import psycopg2
 
-from auth.models import AuthSession, Profile
+from events.models import Event
 
 
 def create_event(event: Event) -> Event:

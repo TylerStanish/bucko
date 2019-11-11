@@ -36,3 +36,13 @@ def get_profile_by_email(email: str) -> Profile:
     g.db.commit()
     return row
 
+def get_profile_by_token(token: str) -> Profile:
+    cur = g.db.cursor()
+    cur.execute("""
+        select * from profile inner join auth_session
+            on (profile.id = auth_session.profile_id)
+        where auth_session.token = %s
+    """, (token,))
+    row = cur.fetchone()
+    g.db.commit()
+    return row

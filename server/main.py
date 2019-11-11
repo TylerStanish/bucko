@@ -10,6 +10,7 @@ from werkzeug.exceptions import HTTPException
 
 from auth.exceptions import ApiException
 from auth.routes import auth_blueprint
+from events.routes import events_blueprint
 from utils.db import get_db_info
 
 
@@ -34,6 +35,7 @@ def create_app():
 
     # register blueprints
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(events_blueprint)
 
     logging.basicConfig(filename='error.log', level=logging.DEBUG)
 

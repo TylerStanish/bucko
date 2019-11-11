@@ -9,6 +9,6 @@ event_fields = (
 )
 Event = namedtuple(
     'Event',
-    profile_fields,
-    defaults=(None,) * len(profile_fields)
+    event_fields,
+    defaults=(None,) * len(event_fields)
 )
