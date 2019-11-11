@@ -11,5 +11,5 @@ before_script:
 install: 
   - "pip install -r requirements.txt"
 script: 
-  - green
+  - green -s 1
 
