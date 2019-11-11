@@ -2,7 +2,7 @@ language: python
 python: 
   - "3.7"
 services: 
-  - postgres
+  - postgresql
 before_install: 
   - "cd server"
 before_script: 
