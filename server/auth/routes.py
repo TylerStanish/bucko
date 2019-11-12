@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint, request, jsonify
 
 from auth.db import create_user, create_user_session
-from auth.exceptions import ApiException, IncorrectPasswordException
+from auth.exceptions import ApiException
 from auth.models import Profile
 from auth.schemas import SignupRequest, LoginResponse
 from auth.services import check_password_matches, hash_password, valid_login
