@@ -26,6 +26,7 @@ def create_app():
     @app.before_request
     def before_request():
         g.db = pool.getconn()
+        g.db.autocommit = False
 
     @app.after_request
     def after(res):

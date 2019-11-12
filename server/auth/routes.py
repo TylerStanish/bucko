@@ -26,7 +26,7 @@ def login():
     data: Profile = SignupRequest().load(request.get_json())
     valid, profile = valid_login(data.email, data.password)
     if not valid:
-        raise IncorrectPasswordException('Incorrect password')
+        raise ApiException('Incorrect password', HTTPStatus.BAD_REQUEST )
     session = create_user_session(profile)
     return jsonify({'token': session.token})
 
