@@ -1,19 +1,24 @@
 import React from 'react'
 import {
   Button,
-  Intent
+  Classes,
+  Dialog,
+  Intent,
+  Overlay
 } from '@blueprintjs/core'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment'
 import {connect} from 'react-redux'
-
-
 import Actions from '../redux/actions'
 
 const localizer = momentLocalizer(moment)
 
+
 class DashboardPage extends React.Component {
+  state = {
+    overlayOpen: false
+  }
   componentDidMount() {
     this.props.fetchEvents()
   }
@@ -24,6 +29,7 @@ class DashboardPage extends React.Component {
           fill
           text='Add event'
           intent={Intent.PRIMARY}
+          onClick={() => this.setState({overlayOpen: true})}
         />
         <section>
           <Calendar
@@ -36,6 +42,10 @@ class DashboardPage extends React.Component {
             views={['week', 'day', 'agenda']}
           />
         </section>
+        <Dialog isOpen={this.state.overlayOpen} onClose={() => this.setState({overlayOpen: false})} className={Classes.OVERLAY_SCROLL_CONTAINER}>
+          This is the overlay
+          This is the overlay
+        </Dialog>
       </div>
     )
   }

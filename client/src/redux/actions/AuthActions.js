@@ -2,6 +2,7 @@ import axios from 'axios'
 import {push} from 'connected-react-router'
 
 import * as Types from './Types'
+import Actions from './'
 import Api from '../../api'
 
 export const getTokenFromLocalStorage = () => {
@@ -12,6 +13,7 @@ export const getTokenFromLocalStorage = () => {
       console.log(token)
       dispatch(setToken(token))
       axios.defaults.headers.common['AUTHORIZATION'] = `Bearer ${token}`
+      dispatch(Actions.events.fetchEvents())
     } else {
       dispatch(setToken(''))
       axios.defaults.headers.common['AUTHORIZATION'] = ''

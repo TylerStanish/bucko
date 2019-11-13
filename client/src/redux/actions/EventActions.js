@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 
 import Api from '../../api'
 import * as Types from './Types.js'
@@ -10,8 +11,8 @@ export const fetchEvents = () => {
     const res = await Api.events.fetchEvents()
     res.data = res.data.map(event => ({
       ...event,
-      eventStart: new Date(event.eventStart),
-      eventEnd: new Date(event.eventEnd),
+      eventStart: moment(event.eventStart).toDate(),
+      eventEnd: moment(event.eventEnd).toDate(),
     }))
     dispatch({
       type: Types.FETCH_EVENTS,
