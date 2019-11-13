@@ -8,33 +8,41 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment'
 import {connect} from 'react-redux'
 
+
+import Actions from '../redux/actions'
+
 const localizer = momentLocalizer(moment)
 
-const DashboardPage = props => {
-  return (
-    <div>
-      <Button
-        fill
-        text='Add event'
-        intent={Intent.PRIMARY}
-      />
-      <section>
-        <Calendar
-          localizer={localizer}
-          events={props.events}
-          startAccessor='start'
-          endAccessor='end'
-          titleAccessor='title'
-          defaultView='day'
-          views={['week', 'day', 'agenda']}
+class DashboardPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchEvents()
+  }
+  render() {
+    return (
+      <div>
+        <Button
+          fill
+          text='Add event'
+          intent={Intent.PRIMARY}
         />
-      </section>
-    </div>
-  )
+        <section>
+          <Calendar
+            localizer={localizer}
+            events={this.props.events}
+            startAccessor='eventStart'
+            endAccessor='eventEnd'
+            titleAccessor='title'
+            defaultView='day'
+            views={['week', 'day', 'agenda']}
+          />
+        </section>
+      </div>
+    )
+  }
 }
 
 export default connect(props => {
   return {
     events: props.events.events
   }
-})(DashboardPage)
+}, {fetchEvents: Actions.events.fetchEvents})(DashboardPage)

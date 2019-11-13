@@ -1,5 +1,7 @@
 import * as AuthActions from './AuthActions'
+import * as EventActions from './EventActions'
 
 export default {
-  auth: AuthActions
+  auth: AuthActions,
+  events: EventActions
 }

@@ -21,8 +21,8 @@ class EventsTest(DbTest):
             content_type='application/json',
             data=json.dumps({
                 'title': 'the title',
-                'event_start': datetime.utcnow().isoformat(),
-                'event_end': (datetime.utcnow() + timedelta(hours=1)).isoformat()
+                'eventStart': datetime.utcnow().isoformat(),
+                'eventEnd': (datetime.utcnow() + timedelta(hours=1)).isoformat()
             }),
             headers={'Authorization': f'Bearer {tok}'}
         )

@@ -13,6 +13,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+    case Types.FETCH_EVENTS:
+      return {
+        ...state,
+        events: action.payload
+      }
     default:
       return initialState
   }

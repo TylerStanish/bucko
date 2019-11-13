@@ -9,11 +9,12 @@ export const getTokenFromLocalStorage = () => {
     const token = await localStorage.getItem('token')
     // axios.defaults.headers.common['Content-Type'] = 'application/json'
     if (token) {
+      console.log(token)
       dispatch(setToken(token))
-      // axios.defaults.headers.common['AUTHORIZATION'] = `Bearer ${token}`
+      axios.defaults.headers.common['AUTHORIZATION'] = `Bearer ${token}`
     } else {
       dispatch(setToken(''))
-      // axios.defaults.headers.common['AUTHORIZATION'] = ''
+      axios.defaults.headers.common['AUTHORIZATION'] = ''
     }
   }
 }
