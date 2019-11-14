@@ -12,6 +12,8 @@ import moment from 'moment'
 import {connect} from 'react-redux'
 import Actions from '../redux/actions'
 
+import CreateEvent from '../components/modals/CreateEvent'
+
 const localizer = momentLocalizer(moment)
 
 
@@ -43,8 +45,7 @@ class DashboardPage extends React.Component {
           />
         </section>
         <Dialog isOpen={this.state.overlayOpen} onClose={() => this.setState({overlayOpen: false})} className={Classes.OVERLAY_SCROLL_CONTAINER}>
-          This is the overlay
-          This is the overlay
+          <CreateEvent/>
         </Dialog>
       </div>
     )

@@ -20,3 +20,10 @@ export const fetchEvents = () => {
     })
   }
 }
+
+export const createEvent = (title, eventStart, eventEnd) => {
+  return async dispatch => {
+    const res = await Api.events.createEvent(title, eventStart, eventEnd)
+    dispatch(fetchEvents())
+  }
+}
