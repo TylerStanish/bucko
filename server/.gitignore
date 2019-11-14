@@ -1,2 +1,5 @@
 venv/
 tags
+__pycache__/
+secrets/
+error.log
