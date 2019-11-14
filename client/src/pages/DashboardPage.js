@@ -45,7 +45,7 @@ class DashboardPage extends React.Component {
           />
         </section>
         <Dialog isOpen={this.state.overlayOpen} onClose={() => this.setState({overlayOpen: false})} className={Classes.OVERLAY_SCROLL_CONTAINER}>
-          <CreateEvent/>
+          <CreateEvent close={() => this.setState({overlayOpen: false})}/>
         </Dialog>
       </div>
     )

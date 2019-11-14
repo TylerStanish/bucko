@@ -6,5 +6,5 @@ export const fetchEvents = () => {
 }
 
 export const createEvent = (title, eventStart, eventEnd) => {
-  return axios.get(Constants.EVENT_URL, {title, eventStart, eventEnd})
+  return axios.post(Constants.EVENT_URL, {title, eventStart, eventEnd})
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {InputGroup, Button} from '@blueprintjs/core'
 import {
-  DatePicker
+  DateTimePicker
 } from '@blueprintjs/datetime'
 import { connect } from 'react-redux'
 
@@ -21,17 +21,18 @@ const CreateEvent = props => {
           placeholder='Title'
           className='login-form-item'
         />
-        <DatePicker
+        <DateTimePicker
           onChange={date => setEventStart(date)}
           value={eventStart}
         />
-        <DatePicker
+        <DateTimePicker
           onChange={date => setEventEnd(date)}
           value={eventEnd}
         />
         <Button text='Create Event' fill onClick={e => {
           e.preventDefault()
           props.createEvent(title, eventStart, eventEnd)
+          props.close()
         }} type='submit'/>
       </form>
     </div>
