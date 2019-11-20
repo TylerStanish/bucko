@@ -10,14 +10,14 @@ class EventsTest(DbTest):
         res = self.signup(self.PRIMARY_EMAIL, 'password')
         tok = res.json.get('token')
         res = self.client.get(
-            '/event',
+            '/api/event',
             headers={'Authorization': f'Bearer {tok}'}
         )
         self.assertEqual(res._status_code, status.OK)
         self.assertEqual(len(res.json), 0)
 
         res = self.client.post(
-            '/event',
+            '/api/event',
             content_type='application/json',
             data=json.dumps({
                 'title': 'the title',
@@ -30,7 +30,7 @@ class EventsTest(DbTest):
         self.assertDictContainsSubset({'title': 'the title'}, res.json)
 
         res = self.client.get(
-            '/event',
+            '/api/event',
             headers={'Authorization': f'Bearer {tok}'}
         )
         self.assertEqual(res._status_code, status.OK)

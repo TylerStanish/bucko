@@ -6,12 +6,12 @@ from tests.utils import DbTest
 
 class AuthTest(DbTest):
     def test_signup_with_no_data(self):
-        res = self.client.post('/auth/signup')
+        res = self.client.post('/api/auth/signup')
         self.assertEqual(res._status_code, status.BAD_REQUEST)
 
     def test_signup_with_invalid_data(self):
         res = self.client.post(
-            '/auth/signup',
+            '/api/auth/signup',
             content_type='application/json',
             data=json.dumps({'emaillll': 'jkl', 'password': 'hi'})
         )
@@ -28,7 +28,7 @@ class AuthTest(DbTest):
     def test_login_fails_when_password_incorrect(self):
         res = self.signup(self.PRIMARY_EMAIL, 'password')
         res = self.client.post(
-            '/auth/login',
+            '/api/auth/login',
             content_type='application/json',
             data=json.dumps({'email': self.PRIMARY_EMAIL, 'password': 'wrongpassword'})
         )
@@ -40,7 +40,7 @@ class AuthTest(DbTest):
         self.assertEqual(res._status_code, status.OK)
 
     def test_login_with_no_data(self):
-        res = self.client.post('/auth/login')
+        res = self.client.post('/api/auth/login')
         self.assertEqual(res._status_code, status.BAD_REQUEST)
 
 

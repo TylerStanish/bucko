@@ -54,14 +54,14 @@ class DbTest(FlaskIntegrationTest):
 
     def signup(self, email, password):
         return self.client.post(
-            '/auth/signup',
+            '/api/auth/signup',
             content_type='application/json',
             data=json.dumps({'email': email, 'password': password})
         )
 
     def login(self, email, password):
         return self.client.post(
-            '/auth/login',
+            '/api/auth/login',
             content_type='application/json',
             data=json.dumps({'email': email, 'password': password})
         )
