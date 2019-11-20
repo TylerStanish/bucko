@@ -8,7 +8,7 @@ from events.db import create_event, get_events_by_profile_id
 from events.schemas import EventSchema
 
 
-events_blueprint = Blueprint('events', __name__, url_prefix='/event')
+events_blueprint = Blueprint('events', __name__, url_prefix='/api/event')
 
 
 @events_blueprint.route('/', methods=['GET'])

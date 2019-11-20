@@ -1,7 +1,8 @@
 import logging
+import os
 import traceback
 
-from flask import Flask, g, jsonify
+from flask import Flask, g, jsonify, send_from_directory
 from flask_cors import CORS
 from marshmallow import ValidationError
 import psycopg2.extras
@@ -16,7 +17,10 @@ from utils.db import get_db_info
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(
+        __name__,
+        static_folder='client/build',
+    )
     CORS(app)
     app.url_map.strict_slashes = False
 
@@ -62,6 +66,13 @@ def create_app():
             code = e.code
             msg = str(e)
         return jsonify({'error': msg}), code
+
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def index(path):
+        if path and os.path.exists(app.static_folder + '/' + path):
+            return send_from_directory(app.static_folder, path)
+        return send_from_directory(app.static_folder, 'index.html')
 
     return app
 

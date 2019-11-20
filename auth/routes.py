@@ -9,7 +9,7 @@ from auth.schemas import SignupRequest, LoginResponse
 from auth.services import check_password_matches, hash_password, valid_login
 
 
-auth_blueprint = Blueprint('auth', __name__, url_prefix='/auth')
+auth_blueprint = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 
 @auth_blueprint.route('/signup', methods=['POST'])

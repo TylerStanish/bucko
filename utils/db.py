@@ -20,7 +20,7 @@ def get_db_info() -> dict:
         return {
             'dbname': os.environ['DBNAME'],
             'user': os.environ['DBUSER'],
-            'host': os.environ['DBUSER'],
+            'host': os.environ['DBHOST'],
             'password': os.environ['DBPASSWORD'],
             'port': os.environ['DBPORT'],
         }
