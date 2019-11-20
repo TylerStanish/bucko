@@ -1,0 +1,8 @@
+{
+  "name": "bucko",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd client && npm i && npm run build"
+  }
+}
