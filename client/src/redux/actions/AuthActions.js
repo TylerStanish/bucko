@@ -24,6 +24,7 @@ export const getTokenFromLocalStorage = () => {
 export const setToken = token => {
   return async dispatch => {
     await localStorage.setItem('token', token)
+    axios.defaults.headers.common['AUTHORIZATION'] = `Bearer ${token}`
     dispatch({
       type: Types.SET_TOKEN,
       payload: token

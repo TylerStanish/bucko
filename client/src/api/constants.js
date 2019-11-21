@@ -1,4 +1,4 @@
-const BASE_URL = env.API_URL
+const BASE_URL = '/api/'
 // export const BASE_URL = 'http://localhost:5000/api/'
 export const LOGIN_URL = BASE_URL + 'auth/login/'
 export const SIGNUP_URL = BASE_URL + 'auth/signup/'
