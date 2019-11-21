@@ -1,2 +1,1 @@
-web: gunicorn wsgi:app --log-file=-
-release: cd client && npm i && npm run build
+web: ce client && npm i && npm run build && cd .. && gunicorn wsgi:app --log-file=-
