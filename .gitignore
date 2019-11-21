@@ -3,3 +3,5 @@ venv/
 secrets/
 error.log
 tags
+
+node_modules/

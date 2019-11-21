@@ -2,5 +2,10 @@
   "name": "bucko",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {}
+  "scripts": {
+    "dev": "concurrently \"cd client && npm start\" \"python run.py\""
+  },
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
 }
