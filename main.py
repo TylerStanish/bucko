@@ -19,7 +19,7 @@ from utils.db import get_db_info
 def create_app():
     app = Flask(
         __name__,
-        static_folder='client/build',
+        # static_folder='client/build',
     )
     CORS(app)
     app.url_map.strict_slashes = False
@@ -67,12 +67,12 @@ def create_app():
             msg = str(e)
         return jsonify({'error': msg}), code
 
-    @app.route('/', defaults={'path': ''})
-    @app.route('/<path:path>')
-    def index(path):
-        if path and os.path.exists(app.static_folder + '/' + path):
-            return send_from_directory(app.static_folder, path)
-        return send_from_directory(app.static_folder, 'index.html')
+    # @app.route('/', defaults={'path': ''})
+    # @app.route('/<path:path>')
+    # def index(path):
+    #     if path and os.path.exists(app.static_folder + '/' + path):
+    #         return send_from_directory(app.static_folder, path)
+    #     return send_from_directory(app.static_folder, 'index.html')
 
     return app
 
