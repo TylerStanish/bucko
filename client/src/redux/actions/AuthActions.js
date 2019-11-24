@@ -10,7 +10,6 @@ export const getTokenFromLocalStorage = () => {
     const token = await localStorage.getItem('token')
     // axios.defaults.headers.common['Content-Type'] = 'application/json'
     if (token) {
-      console.log(token)
       dispatch(setToken(token))
       axios.defaults.headers.common['AUTHORIZATION'] = `Bearer ${token}`
       dispatch(Actions.events.fetchEvents())
@@ -34,7 +33,13 @@ export const setToken = token => {
 
 export const login = (email, password) => {
   return async dispatch => {
-    const res = await Api.auth.login(email, password)
+    let res
+    try{
+      res = await Api.auth.login(email, password)
+    } catch (e) {
+      alert(e.response.data.error)
+      return {type: null}
+    }
     const {token} = res.data
     dispatch(setToken(token))
     dispatch(push('/dashboard'))

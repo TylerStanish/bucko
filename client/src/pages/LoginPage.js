@@ -25,10 +25,18 @@ const LoginPage = props => {
         />
         <Button text='Log in' fill onClick={e => {
           e.preventDefault()
+          if (!email || !password) {
+            alert('Missing email and/or password')
+            return
+          }
           props.login(email, password)
         }} type='submit'/>
         <Button text='Sign up' fill onClick={e => {
           e.preventDefault()
+          if (!email || !password) {
+            alert('Missing email and/or password')
+            return
+          }
           props.signup(email, password)
         }} type='submit'/>
       </form>
