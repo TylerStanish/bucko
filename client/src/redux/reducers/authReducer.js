@@ -4,6 +4,7 @@ const initialState = {
   loginLoading: false,
   loginError: '',
   token: '',
+  signupLoading: false,
 }
 
 export default (state = initialState, action) => {
@@ -12,6 +13,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         token: action.payload
+      }
+    case Types.LOGIN_LOADING:
+      return {
+        ...state,
+        loginLoading: action.payload
+      }
+    case Types.SIGNUP_LOADING:
+      return {
+        ...state,
+        signupLoading: action.payload
       }
     default:
       return state

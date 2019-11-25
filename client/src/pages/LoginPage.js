@@ -30,7 +30,7 @@ const LoginPage = props => {
             return
           }
           props.login(email, password)
-        }} type='submit'/>
+        }} loading={props.loginLoading} type='submit'/>
         <Button text='Sign up' fill onClick={e => {
           e.preventDefault()
           if (!email || !password) {
@@ -38,12 +38,17 @@ const LoginPage = props => {
             return
           }
           props.signup(email, password)
-        }} type='submit'/>
+        }} loading={props.signupLoading} type='submit'/>
       </form>
     </div>
   )
 }
-export default connect(null, {
+export default connect(state => {
+  return {
+    loginLoading: state.auth.loginLoading,
+    signupLoading: state.auth.signupLoading
+  }
+}, {
   login: Actions.auth.login,
   signup: Actions.auth.signup
 })(LoginPage)
