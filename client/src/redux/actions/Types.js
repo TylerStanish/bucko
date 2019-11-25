@@ -1,3 +1,5 @@
 export const SET_TOKEN = 'set-token'
 export const LOGIN = 'login'
 export const FETCH_EVENTS = 'fetch_events'
+export const LOGIN_LOADING = 'login_loading'
+export const SIGNUP_LOADING = 'signup_loading'

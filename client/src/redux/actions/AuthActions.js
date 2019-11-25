@@ -33,13 +33,16 @@ export const setToken = token => {
 
 export const login = (email, password) => {
   return async dispatch => {
+    dispatch({type: Types.LOGIN_LOADING, payload: true})
     let res
     try{
       res = await Api.auth.login(email, password)
     } catch (e) {
+      await dispatch({type: Types.LOGIN_LOADING, payload: false})
       alert(e.response.data.error)
       return {type: null}
     }
+    dispatch({type: Types.LOGIN_LOADING, payload: false})
     const {token} = res.data
     dispatch(setToken(token))
     dispatch(push('/dashboard'))
@@ -55,8 +58,10 @@ export const logout = () => {
 
 export const signup = (email, password) => {
   return async dispatch => {
+    dispatch({type: Types.SIGNUP_LOADING, payload: true})
     const res = await Api.auth.signup(email, password)
     const {token} = res.data
+    dispatch({type: Types.SIGNUP_LOADING, payload: true})
     dispatch(setToken(token))
     dispatch(push('/dashboard'))
   }
